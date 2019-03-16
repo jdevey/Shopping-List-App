@@ -1,56 +1,29 @@
 import React from 'react';
 
-import { createAppContainer, createStackNavigator, NavigationActions } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 
-import AddIcon from '../components/AddIcon';
-import AddItem from '../components/AddItem';
+import CreateIcon from '../components/CreateIcon';
+import CreateItem from '../components/CreateItem';
 import CreateList from '../components/CreateList';
 import Home from '../components/Home';
-import ShowAll from '../components/ShowAll';
-import ShowList from '../components/ShowList';
+import ListView from '../components/ListView';
 
-let NavigationService = class NavigationService {
+let _navigator;
 
-    constructor () {}
-
-    getTopNavigator() {
-        console.log("ccc");
-        return (
-            <TopLevelNavigator ref={navigatorRef => {
-                    console.log("aaa ", navigatorRef);
-                    this._navigator = navigatorRef;
-                }}
-            />
-        );
-    }
-
-    navigate(routeName, params) {
-        console.log("bbb ", this._navigator);
-        this._navigator.dispatch(
-            NavigationActions.navigate({
-                routeName,
-                params
-            })
-        )
-    }
+function setTopLevelNavigator(ref) {
+	_navigator = ref;
 }
 
-const navigationService = new NavigationService();
+function navigate(routeName, params) {
+	_navigator.dispatch(
+		NavigationActions.navigate({
+			routeName,
+			params
+		})
+	)
+}
 
-export default navigationService;
-
-const Root = createStackNavigator(
-    {
-        AddIcon: AddIcon,
-        AddItem: AddItem,
-        CreateList: CreateList,
-        Home: Home,
-        ShowAll: ShowAll,
-        ShowList: ShowList
-    },
-    {
-        initialRouteName: 'Home'
-    }
-)
-
-const TopLevelNavigator = createAppContainer(Root);
+export default {
+	navigate,
+	setTopLevelNavigator
+}
