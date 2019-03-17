@@ -15,7 +15,6 @@ export default StyleSheet.create({
 	  color: 'green'
 	},
 	button: {
-	  alignItems: 'center',
 	  backgroundColor: 'lightgray',
 	  padding: 10,
 	  margin: 15,

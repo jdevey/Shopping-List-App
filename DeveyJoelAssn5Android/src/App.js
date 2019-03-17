@@ -6,6 +6,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import store from './redux/store';
 import NavigationService from './services/NavigationService';
 import styles from './styles/MyStyles';
+import dataController from './services/datacontroller';
 
 import CreateIcon from './components/CreateIcon';
 import CreateItem from './components/CreateItem';
@@ -17,17 +18,17 @@ import ListView from './components/ListView';
 
 const TopLevelNavigator = createStackNavigator(
 	{
-        CreateIcon: CreateIcon,
+		// reAdd createIcon if needed
         CreateItem: CreateItem,
 		CreateList: CreateList,
 		EditItem: EditItem,
 		EditList: EditList,
-        Home: Home,
+		Home: Home,
         ListView: ListView
     },
     {
 		initialRouteName: 'Home',
-		initialRouteParams: {} //TODO add start props
+		initialRouteParams: {}
     }
 );
 

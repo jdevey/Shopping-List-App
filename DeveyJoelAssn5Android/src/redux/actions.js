@@ -1,6 +1,6 @@
 export function createList(name, icon, date) {
 	return {
-		type: 'ADD_LIST',
+		type: 'CREATE_LIST',
 		name: name,
 		icon: icon,
 		date: date
@@ -9,7 +9,7 @@ export function createList(name, icon, date) {
 
 export function createItem(parentID, text) {
 	return {
-		type: 'ADD_ITEM',
+		type: 'CREATE_ITEM',
 		parentID: parentID,
 		text: text
 	}

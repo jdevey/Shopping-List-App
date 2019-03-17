@@ -8,6 +8,7 @@ import { addList } from '../redux/actions';  //TODO make this
 import NavigationService from '../services/NavigationService';
 import store from '../redux/store';
 import { createList } from '../redux/actions';
+import getElementByID from '../utils/utility';
 
 class CreateList extends Component {
 
@@ -23,18 +24,28 @@ class CreateList extends Component {
 		return (
 			<View style={styles.centered}>
 				<Text>List name: </Text>
-				<TextInput style={{borderColor: 'black', borderWidth: 2, height: 40, width: 160}} onChangeText={(text) => this.setState({name: text})} maxLength={100} value={this.state.name} />
+				<TextInput style={{borderColor: 'black', borderWidth: 2, height: 40, width: 160}}
+					onChangeText={(text) => this.setState({name: text})} maxLength={100} value={this.state.name} />
 				<Text>Icon image url: </Text>
-				<TextInput style={{borderColor: 'black', borderWidth: 2, height: 40, width: 160}} onChangeText={(text) => this.setState({icon: text})} maxLength={100} value={this.state.url} />
+				<TextInput style={{borderColor: 'black', borderWidth: 2, height: 40, width: 160}}
+				onChangeText={(text) => this.setState({icon: text})} maxLength={500} value={this.state.icon} />
 				<TouchableOpacity style={styles.button} onPress={() => {
-						this.props.createList(this.state.name, this.state.url);
-						NavigationService.navigate('Home') // TODO change Home to ListView
-					}}>
-					<Text>Create!</Text>
+					this.props.createList(this.state.name, this.state.icon);
+					NavigationService.navigate('ListView', {id: this.props.newID})
+				}}>
+					<Text>Create</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.button} onPress={() => NavigationService.navigate('Home')}><Text>Cancel</Text></TouchableOpacity>
+				<TouchableOpacity style={styles.button} onPress={() => NavigationService.navigate('Home')}>
+					<Text>Cancel</Text>
+				</TouchableOpacity>
 			</View>
 		)
+	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		newID: state.nextListID
 	}
 }
 
@@ -44,4 +55,4 @@ const mapDispatchToProps = dispatch => ({
 	}
 })
 
-export default connect(null, mapDispatchToProps)(CreateList)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateList)
